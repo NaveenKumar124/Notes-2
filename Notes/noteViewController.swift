@@ -13,7 +13,7 @@ class noteViewController: UIViewController, UITextFieldDelegate,  UINavigationCo
 
     @IBOutlet weak var noteInfoView: UIView!
     @IBOutlet weak var noteImageViewView: UIView!
-    
+   
     @IBOutlet weak var noteNameLabel: UITextField!
     @IBOutlet weak var noteDescriptionLabel: UITextView!
     

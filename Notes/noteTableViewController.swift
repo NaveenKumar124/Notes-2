@@ -13,9 +13,13 @@ class noteTableViewController: UITableViewController {
 
     var notes = [Note]()
     
+    @IBOutlet weak var searchbar: UISearchBar!
     var managedObjectContext: NSManagedObjectContext? {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }
+    
+    var searchNotes = [String]()
+    var searching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +51,14 @@ class noteTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "noteTableViewCell", for: indexPath) as! noteTableViewCell
-
+//
+//        if searching{
+//            cell?.textLabel?.text = searchNotes[indexPath.row]
+//        }
+//        else{
+//            cell?.textLabel?.text = notes[indexPath.row]
+//        }
+        
         let note: Note = notes[indexPath.row]
         cell.configureCell(note: note)
         cell.backgroundColor = UIColor.clear
@@ -155,4 +166,12 @@ class noteTableViewController: UITableViewController {
 
     }
 
+}
+
+extension noteTableViewController: UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
+       // searchNotes = notes.filter({$0.prefix(searchText.count) == searchText})
+        searching = true
+        tableView.reloadData()
+    }
 }
